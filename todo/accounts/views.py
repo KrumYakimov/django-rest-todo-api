@@ -12,7 +12,7 @@ from todo.accounts.serializers import (
     LoginRequestSerializer,
     LoginResponseSerializer,
     LogoutRequestSerializer,
-    LogoutResponseSerializer,
+    LogoutResponseSerializer, ErrorResponseSerializer,
 )
 
 UserModel = get_user_model()
@@ -29,7 +29,10 @@ class RegisterView(generics.CreateAPIView):
     summary="Login endpoint",
     description="Authenticate a user and get back access and refresh tokens.",
     request=LoginRequestSerializer,
-    responses={200: LoginResponseSerializer, 401: "Invalid username or password"},
+    responses={
+        200: LoginResponseSerializer,
+        401: ErrorResponseSerializer,  # Use the error serializer here
+    },
 )
 class LoginView(APIView):
     permission_classes = [AllowAny]
@@ -61,8 +64,12 @@ class LoginView(APIView):
 @extend_schema(
     tags=["auth"],
     summary="Logout endpoint",
+    description="Blacklist the refresh token",
     request=LogoutRequestSerializer,
-    responses={200: LogoutResponseSerializer, 400: "Invalid or expired token"},
+    responses={
+        200: LogoutResponseSerializer,
+        400: ErrorResponseSerializer,  # Use the error serializer here
+    },
 )
 class LogoutView(APIView):
     def post(self, request, *args, **kwargs):

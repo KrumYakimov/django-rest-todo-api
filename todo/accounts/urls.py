@@ -5,7 +5,7 @@ from todo.accounts import views
 
 urlpatterns = [
     path("auth/register/", views.RegisterView.as_view(), name="register"),
-    path("auth/login/", views.LoginView.as_view(), name="login"),
-    path("auth/logout/", views.LogoutView.as_view(), name="logout"),
-    path("auth/token/refresh", TokenRefreshView.as_view(), name="logout"),
+    path("login/", views.LoginView.as_view(), name="login"),
+    path("logout/", views.LogoutView.as_view(), name="logout"),
+    path("token/refresh", TokenRefreshView.as_view(), name="logout"),
 ]

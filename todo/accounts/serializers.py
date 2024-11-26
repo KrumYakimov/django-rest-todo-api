@@ -4,6 +4,10 @@ from rest_framework import serializers
 UserModel = get_user_model()
 
 
+class ErrorResponseSerializer(serializers.Serializer):
+    error = serializers.CharField()
+
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 

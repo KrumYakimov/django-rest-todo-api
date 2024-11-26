@@ -33,7 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 PROJECT_APPS = [
-    "todo.accounts.apps.AccountsConfig"
+    "todo.accounts.apps.AccountsConfig",
+    "todo.todos.apps.TodosConfig"
 ]
 
 INSTALLED_APPS = [
